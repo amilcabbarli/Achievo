@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Achievo
 {
@@ -31,23 +32,32 @@ namespace Achievo
         //Add new note to database and to checkedListBox
         private void addButton_Click(object sender, EventArgs e)
         {
-            string checkBoxText = checkTextBox.Text;
-            string checkBoxName = getUniqueName();
-            bool isChecked2 = false;
+            if (string.IsNullOrEmpty(checkTextBox.Text))
+            {
+                controlLabel.Text = "Please add name for your note";
+            }
+            else
+            {
+                controlLabel.Text = null;
 
-            CheckboxItem checkboxItem = new CheckboxItem(checkBoxText, isChecked2, checkBoxName);
-            checkedListBox1.Items.Add(checkboxItem);
+                string checkBoxText = checkTextBox.Text;
+                string checkBoxName = getUniqueName();
+                bool isChecked2 = false;
 
-            string query = "insert into checkboxtable (username, checkboxname, checkboxtext, checked) values (@username, @checkname, @checktext, @checked)";
-            NpgsqlConnection conn = new NpgsqlConnection(connstring);
-            conn.Open();
-            NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("username", storedUsername);
-            cmd.Parameters.AddWithValue("checkname", checkBoxName);
-            cmd.Parameters.AddWithValue("checktext", checkBoxText);
-            cmd.Parameters.AddWithValue("checked", isChecked2);
-            cmd.ExecuteNonQuery();
-            conn.Close();
+                CheckboxItem checkboxItem = new CheckboxItem(checkBoxText, isChecked2, checkBoxName);
+                checkedListBox1.Items.Add(checkboxItem);
+
+                string query = "insert into checkboxtable (username, checkboxname, checkboxtext, checked) values (@username, @checkname, @checktext, @checked)";
+                NpgsqlConnection conn = new NpgsqlConnection(connstring);
+                conn.Open();
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("username", storedUsername);
+                cmd.Parameters.AddWithValue("checkname", checkBoxName);
+                cmd.Parameters.AddWithValue("checktext", checkBoxText);
+                cmd.Parameters.AddWithValue("checked", isChecked2);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
 
             checkTextBox.Clear();
         }

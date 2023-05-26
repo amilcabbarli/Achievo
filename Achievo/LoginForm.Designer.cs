@@ -1,4 +1,6 @@
-﻿namespace Achievo
+﻿using System.Drawing;
+
+namespace Achievo
 {
     partial class loginForm
     {
@@ -40,17 +42,17 @@
             // userBox
             // 
             this.userBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.userBox.Location = new System.Drawing.Point(309, 76);
+            this.userBox.Location = new System.Drawing.Point(249, 76);
             this.userBox.Name = "userBox";
-            this.userBox.Size = new System.Drawing.Size(153, 21);
+            this.userBox.Size = new System.Drawing.Size(164, 21);
             this.userBox.TabIndex = 0;
             // 
             // passBox
             // 
             this.passBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.passBox.Location = new System.Drawing.Point(309, 129);
+            this.passBox.Location = new System.Drawing.Point(249, 129);
             this.passBox.Name = "passBox";
-            this.passBox.Size = new System.Drawing.Size(153, 21);
+            this.passBox.Size = new System.Drawing.Size(164, 21);
             this.passBox.TabIndex = 1;
             this.passBox.UseSystemPasswordChar = true;
             this.passBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passBox_KeyDown);
@@ -59,7 +61,8 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(226, 76);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(53)))), ((int)(((byte)(87)))));
+            this.label1.Location = new System.Drawing.Point(246, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 17);
             this.label1.TabIndex = 2;
@@ -69,7 +72,8 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(230, 129);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(53)))), ((int)(((byte)(87)))));
+            this.label2.Location = new System.Drawing.Point(246, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 17);
             this.label2.TabIndex = 3;
@@ -77,11 +81,11 @@
             // 
             // loginButton
             // 
-            this.loginButton.BackColor = System.Drawing.Color.LemonChiffon;
+            this.loginButton.BackColor = System.Drawing.Color.LightBlue;
             this.loginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.loginButton.Location = new System.Drawing.Point(229, 173);
+            this.loginButton.Location = new System.Drawing.Point(249, 166);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(105, 40);
+            this.loginButton.Size = new System.Drawing.Size(74, 40);
             this.loginButton.TabIndex = 4;
             this.loginButton.Text = "Log in";
             this.loginButton.UseVisualStyleBackColor = false;
@@ -89,11 +93,11 @@
             // 
             // signupButton
             // 
-            this.signupButton.BackColor = System.Drawing.Color.LightBlue;
+            this.signupButton.BackColor = System.Drawing.Color.LightSalmon;
             this.signupButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.signupButton.Location = new System.Drawing.Point(357, 173);
+            this.signupButton.Location = new System.Drawing.Point(339, 166);
             this.signupButton.Name = "signupButton";
-            this.signupButton.Size = new System.Drawing.Size(105, 40);
+            this.signupButton.Size = new System.Drawing.Size(74, 40);
             this.signupButton.TabIndex = 5;
             this.signupButton.Text = "Sign up";
             this.signupButton.UseVisualStyleBackColor = false;
@@ -113,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Linen;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(250)))), ((int)(((byte)(238)))));
             this.ClientSize = new System.Drawing.Size(724, 401);
             this.Controls.Add(this.controlLabel);
             this.Controls.Add(this.signupButton);
