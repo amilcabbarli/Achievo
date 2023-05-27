@@ -160,6 +160,7 @@ namespace Achievo
             {
                 Console.WriteLine($"Checkbox unchecked: {checkedItem}");
             }
+
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -185,12 +186,34 @@ namespace Achievo
 
         private void profileLabel_MouseHover(object sender, EventArgs e)
         {
-            profileLabel.ForeColor = Color.Magenta;
+            profileLabel.LinkColor = Color.Blue;
         }
 
         private void profileLabel_MouseLeave(object sender, EventArgs e)
         {
-            profileLabel.ForeColor = Color.Black;
+            profileLabel.LinkColor = Color.Black;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if(notesPanel.Visible == true)
+            {
+                notesPanel.Visible = false;
+            }
+            else
+            {
+                notesPanel.Visible = true;
+            }
+        }
+
+        private void linkLabel1_MouseHover(object sender, EventArgs e)
+        {
+            linkLabel1.LinkColor = Color.Blue;
+        }
+
+        private void linkLabel1_MouseLeave(object sender, EventArgs e)
+        {
+            linkLabel1.LinkColor = Color.Black;
         }
     }
 }
