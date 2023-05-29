@@ -25,7 +25,6 @@ namespace Achievo
 
         private void Workspace_Load(object sender, EventArgs e)
         {
-            profileLabel.Text = storedUsername;
             RetrieveCheckboxes();
         }
 
@@ -81,7 +80,7 @@ namespace Achievo
             try
             {
 
-                string retrieveQuery = "select username, checkboxname, checkboxtext, checked from checkboxtable where username = @username order by id asc";
+                string retrieveQuery = "select username, checkboxname, checkboxtext, checked from checkboxtable where username = @username order by checked = true";
                 conn.Open();
                 using (NpgsqlCommand cmd = new NpgsqlCommand(retrieveQuery, conn))
                 {
@@ -94,8 +93,8 @@ namespace Achievo
                             string checkboxText = reader.GetString(2);
                             bool Checked = reader.GetBoolean(3);
 
-                            CheckboxItem checkboxItem = new CheckboxItem(checkboxText, Checked, checkboxName);
-                            checkedListBox1.Items.Add(checkboxItem);
+                            CheckboxItem2 checkboxItem = new CheckboxItem2(checkboxText, checkboxName);
+                            checkedListBox1.Items.Add(checkboxItem, Checked);
                         }
                     }
                 }
@@ -111,25 +110,57 @@ namespace Achievo
             }
         }
 
+        //generate unique names for every checkbox added
         private string getUniqueName()
         {
             string uniqueName = Guid.NewGuid().ToString();
             return uniqueName;
         }
 
+        private int FindCheckboxIndex(bool checkboxValue)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                bool itemValue = checkedListBox1.GetItemChecked(i);
+                if (itemValue == checkboxValue)
+                {
+                    return i; // Return the index if the checkbox value matches
+                }
 
+
+            }
+
+            return -1;
+        }
 
         public class CheckboxItem
         {
             public string Text { get; set; }
             public string Name { get; set; }
-            public bool IsChecked { get; set; }
+            public bool Checked { get; set; }
 
             public CheckboxItem(string text, bool isChecked, string name)
             {
                 Text = text;
                 Name = name;
-                IsChecked = isChecked;
+                Checked = isChecked;
+            }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        public class CheckboxItem2
+        {
+            public string Text { get; set; }
+            public string Name { get; set; }
+
+            public CheckboxItem2(string text, string name)
+            {
+                Text = text;
+                Name = name;
             }
 
             public override string ToString()
@@ -140,10 +171,6 @@ namespace Achievo
 
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            if(checkedListBox1.SelectedIndex != -1)
-            {
-                deleteButton.Visible = true;
-            }
 
             NpgsqlConnection conn = new NpgsqlConnection(connstring);
             conn.Open();
@@ -192,28 +219,6 @@ namespace Achievo
         private void profileLabel_MouseLeave(object sender, EventArgs e)
         {
             profileLabel.LinkColor = Color.Black;
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if(notesPanel.Visible == true)
-            {
-                notesPanel.Visible = false;
-            }
-            else
-            {
-                notesPanel.Visible = true;
-            }
-        }
-
-        private void linkLabel1_MouseHover(object sender, EventArgs e)
-        {
-            linkLabel1.LinkColor = Color.Blue;
-        }
-
-        private void linkLabel1_MouseLeave(object sender, EventArgs e)
-        {
-            linkLabel1.LinkColor = Color.Black;
         }
     }
 }
